@@ -27,19 +27,19 @@ A) Gaussian Classifier with Fisher Score
 Feature Selection: Fisher Score
 Classification: Gaussian Model
 Workflow:
-Compute Fisher Score for each feature
-Select top features with highest discriminability
-Train Gaussian classifier on selected features
+Compute Fisher Score for each feature,
+Select top features with highest discriminability,
+Train Gaussian classifier on selected features.
 Why Fisher Score?
 Fisher Score evaluates feature separability between two classes (right hand vs feet). It ranks features based on their contribution to classification​.
 
 B) Random Forest Classifier with CSP
-Feature Selection: Common Spatial Patterns (CSP)
+Feature Selection: Common Spatial Patterns (CSP).
 Classification: Random Forest
 Workflow:
-Apply CSP to extract discriminative EEG features
-Train Random Forest classifier on CSP features
-Evaluate model performance using accuracy & Youden Index
+Apply CSP to extract discriminative EEG features,
+Train Random Forest classifier on CSP features,
+Evaluate model performance using accuracy. 
 Why CSP?
 CSP maximizes variance differences between two classes, making it ideal for motor imagery BCI​.
 
@@ -49,8 +49,6 @@ RF classifiers provide non-linear decision boundaries, handle high-dimensional d
 3. Performance Metrics
    
 Classification Accuracy
-ERD/ERS Analysis (Event-Related Desynchronization/Synchronization)​
-Installation & Dependencies
 
 4. Exponential Accumulation Framework for Decision Making
 To enhance the robustness and reliability of EEG-based motor imagery classification, we implement an Exponential Accumulation Framework for decision-making. This framework helps to smooth fluctuations in classification outputs, preventing erratic false positives and ensuring stable decision boundaries.
