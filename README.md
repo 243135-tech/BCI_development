@@ -72,12 +72,8 @@ P
 t
 ​	
   is computed as:
-
-P
-t
-
-​	
- =αP 
+	
+Pt =αP 
 t−1
 ​	
  +(1−α)p 
