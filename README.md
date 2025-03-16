@@ -92,7 +92,7 @@ t
 ​	
   is the classifier’s probability output at time 
 t,
-α is the smoothing factor (typically set between 0.9 and 0.99 to retain past information),
+α is the smoothing factor.
 P 
 0
 ​	
