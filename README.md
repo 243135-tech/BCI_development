@@ -18,8 +18,8 @@ Cue-based MI task (Graz-BCI Paradigm)
 5s trials with log-band power and CSP filtering
 
 1. EEG Data Preprocessing
-Band-pass filtering (4-56 Hz, Butterworth filter)
-Log-band power extraction
+Band-pass filtering (4-56 Hz, Butterworth filter),
+Powe Spectral Density (proc_spectogram.m),
 Feature extraction in mu (8-12 Hz) & beta (14-30 Hz) bands
 2. Feature Selection & Classification
 
