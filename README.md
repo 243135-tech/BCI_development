@@ -52,6 +52,151 @@ Classification Accuracy
 ERD/ERS Analysis (Event-Related Desynchronization/Synchronization)​
 Installation & Dependencies
 
+4. Exponential Accumulation Framework for Decision Making
+To enhance the robustness and reliability of EEG-based motor imagery classification, we implement an Exponential Accumulation Framework for decision-making. This framework helps to smooth fluctuations in classification outputs, preventing erratic false positives and ensuring stable decision boundaries.
+
+Key Concept: Smoothing Classification Probabilities
+
+Instead of making decisions based on single-instance classifications, which can be noisy, we apply an exponential moving average to accumulate evidence over time. Given a probability output 
+p
+t
+p 
+t
+​	
+  at time 
+t
+t, the accumulated decision probability
+P
+t
+P 
+t
+​	
+  is computed as:
+
+P
+t
+=
+α
+P
+t
+−
+1
++
+(
+1
+−
+α
+)
+p
+t
+P 
+t
+​	
+ =αP 
+t−1
+​	
+ +(1−α)p 
+t
+​	
+ 
+where:
+
+P
+t
+P 
+t
+​	
+  is the accumulated probability at time 
+t
+t,
+p
+t
+p 
+t
+​	
+  is the classifier’s probability output at time 
+t
+t,
+α
+α is the smoothing factor (typically set between 0.9 and 0.99 to retain past information),
+P
+0
+P 
+0
+​	
+  is initialized to zero or a neutral state.
+Decision Thresholding
+
+A command is triggered when 
+P
+t
+P 
+t
+​	
+  exceeds a predefined threshold 
+T
+d
+T 
+d
+​	
+ :
+
+Decision
+=
+arg
+⁡
+max
+⁡
+i
+(
+P
+t
+,
+i
+)
+if
+max
+⁡
+(
+P
+t
+)
+>
+T
+d
+Decision=arg 
+i
+max
+​	
+ (P 
+t,i
+​	
+ )ifmax(P 
+t
+​	
+ )>T 
+d
+​	
+ 
+where:
+
+i
+i represents each possible class (e.g., right hand vs feet imagery),
+T
+d
+T 
+d
+​	
+  is an adaptive threshold tuned to minimize false positives.
+Advantages of the Exponential Accumulation Framework
+
+✅ Smooths the classification output, reducing momentary fluctuations.
+✅ Filters out noise-related artifacts, improving robustness.
+✅ Enhances real-time usability, ensuring reliable command delivery.
+✅ Reduces cognitive load by requiring more consistent user intent before a decision is made.
+
+This approach significantly improves BCI performance, especially in asynchronous (self-paced) BCIs, where decisions need to be stable rather than reacting to every small change in the EEG signal
+
 To run the MATLAB scripts:
 
 Install MATLAB (recommended: 2020b or newer).
