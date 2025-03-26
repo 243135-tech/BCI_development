@@ -52,17 +52,15 @@ Workflow:
 Apply CSP to extract discriminative EEG features,
 Train Random Forest classifier on CSP features,
 Evaluate model performance using accuracy. 
-Why CSP?
-CSP maximizes variance differences between two classes, making it ideal for motor imagery BCI​.
-
-Why Random Forest?
-RF classifiers provide non-linear decision boundaries, handle high-dimensional data well, and outperform linear classifiers for EEG tasks​.
 
 3. Performance Metrics
    
 Classification Accuracy
+
 A)Accuracy overall on all the evaluation data: 79%
+
 B)Accuracy overall on all the evaluation data: 85%
+
 C)Accuracy overall on all the evaluation data: 52%
 
 4. Exponential Accumulation Framework for Decision Making
