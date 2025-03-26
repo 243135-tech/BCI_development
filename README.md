@@ -2,7 +2,7 @@
 Overview
 This repository contains code and documentation for a motor imagery-based brain-computer interface (MI-BCI) using EEG signals. The project implements two different classification pipelines for motor imagery tasks:
 
-Gaussian Classifier using Fisher Score for feature selection.
+Gaussian Classifier using Fisher Score for CSP feature selection.
 Random Forest Classifier using Common Spatial Patterns (CSP) for feature selection.
 The dataset used is sourced from the BNCI Horizon 2020 repository, containing EEG recordings from motor imagery tasks.
 
@@ -24,16 +24,28 @@ Feature extraction in mu (8-12 Hz) & beta (14-30 Hz) bands
 2. Feature Selection & Classification
 
 A) Gaussian Classifier with Fisher Score
-Feature Selection: Fisher Score
+Feature Extraction: Apply CSP to extract log-variance features.
+Feature Selection: Rank CSP features by Fisher Score; select top ones.
 Classification: Gaussian Model
 Workflow:
-Compute Fisher Score for each feature,
+Compute Fisher Score for each CSP feature,
 Select top features with highest discriminability,
 Train Gaussian classifier on selected features.
 Why Fisher Score?
 Fisher Score evaluates feature separability between two classes (right hand vs feet). It ranks features based on their contribution to classification​.
+Accuracy overall on all the evaluation data: 79%
 
-B) Random Forest Classifier with CSP
+B) SVM Classifier with Fisher Score
+Feature Extraction: Apply CSP to extract log-variance features.
+Feature Selection: Rank CSP features by Fisher Score; select top ones.
+Classification: SVM Model
+Workflow:
+Compute Fisher Score for each CSP feature,
+Select top features with highest discriminability,
+Train SVM classifier on selected features.
+Accuracy overall on all the evaluation data: 85%
+
+C) Random Forest Classifier with CSP
 Feature Selection: Common Spatial Patterns (CSP).
 Classification: Random Forest
 Workflow:
@@ -49,6 +61,9 @@ RF classifiers provide non-linear decision boundaries, handle high-dimensional d
 3. Performance Metrics
    
 Classification Accuracy
+A)Accuracy overall on all the evaluation data: 79%
+B)Accuracy overall on all the evaluation data: 85%
+C)Accuracy overall on all the evaluation data: 52%
 
 4. Exponential Accumulation Framework for Decision Making
 To enhance the robustness and reliability of EEG-based motor imagery classification, we implement an Exponential Accumulation Framework for decision-making. This framework helps to smooth fluctuations in classification outputs, preventing erratic false positives and ensuring stable decision boundaries.
