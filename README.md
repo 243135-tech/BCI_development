@@ -140,7 +140,9 @@ T
 d
 ​	
   is an adaptive threshold tuned to minimize false positives.
-This approach significantly improves BCI performance, especially in asynchronous (self-paced) BCIs, where decisions need to be stable rather than reacting to every small change in the EEG signal
+This approach significantly improves BCI performance, especially in asynchronous (self-paced) BCIs, where decisions need to be stable rather than reacting to every small change in the EEG signal.
+
+In the Trainings folder there's everything to process and train a classifier on data recorded via 16 channel EEG cap, the MI tasks performed were Right Arm vs Right Hand.
 
 To run the MATLAB scripts:
 
