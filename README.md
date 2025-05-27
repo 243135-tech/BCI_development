@@ -45,14 +45,6 @@ Select top features with highest discriminability,
 Train SVM classifier on selected features.
 Accuracy overall on all the evaluation data: 85%
 
-C) Random Forest Classifier with CSP
-Feature Selection: Common Spatial Patterns (CSP).
-Classification: Random Forest
-Workflow:
-Apply CSP to extract discriminative EEG features,
-Train Random Forest classifier on CSP features,
-Evaluate model performance using accuracy. 
-
 3. Performance Metrics
    
 Classification Accuracy
@@ -60,8 +52,6 @@ Classification Accuracy
 A)Accuracy overall on all the evaluation data: 79%
 
 B)Accuracy overall on all the evaluation data: 85%
-
-C)Accuracy overall on all the evaluation data: 52%
 
 4. Exponential Accumulation Framework for Decision Making
 To enhance the robustness and reliability of EEG-based motor imagery classification, we implement an Exponential Accumulation Framework for decision-making. This framework helps to smooth fluctuations in classification outputs, preventing erratic false positives and ensuring stable decision boundaries.
