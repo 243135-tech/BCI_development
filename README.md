@@ -1,162 +1,107 @@
 # BCI_development
-Overview
-This repository contains code and documentation for a motor imagery-based brain-computer interface (MI-BCI) using EEG signals. The project implements two different classification pipelines for motor imagery tasks:
 
-Gaussian Classifier using Fisher Score for CSP feature selection.
-Random Forest Classifier using Common Spatial Patterns (CSP) for feature selection.
-The dataset used is sourced from the BNCI Horizon 2020 repository, containing EEG recordings from motor imagery tasks.
+## Overview
 
-Dataset
+This repository contains MATLAB code and documentation for the development of a Motor Imagery (MI)-based Brain-Computer Interface (BCI) system using EEG signals. The project is divided into two main components:
 
-Source: https://bnci-horizon-2020.eu/database/data-sets
-EEG Setup:
-Sampling Rate: 512 Hz
-Channels: 15 (Motor Cortex, Graz-BCI Setup)
-Tasks: Right Hand vs Feet Motor Imagery
-Experimental Protocol:
-Cue-based MI task (Graz-BCI Paradigm)
-5s trials with log-band power and CSP filtering
+- `Online_Dataset`: Processing, feature extraction, and classification using public EEG data from the BNCI Horizon 2020 dataset.
+- `Real_Data`: Preprocessing, classification, and command generation for controlling a robotic exoskeleton and game interface using real EEG data.
 
-1. EEG Data Preprocessing
-Band-pass filtering (4-30 Hz, Butterworth filter), 
-Power Spectral Density (proc_spectogram.m), 
-Feature extraction in mu (8-12 Hz) & beta (14-30 Hz) bands
-2. Feature Selection & Classification
+---
 
-A) Gaussian Classifier with Fisher Score
-Feature Extraction: Apply CSP to extract log-variance features.
-Feature Selection: Rank CSP features by Fisher Score; select top ones.
-Classification: Gaussian Model
-Workflow:
-Compute Fisher Score for each CSP feature,
-Select top features with highest discriminability,
-Train Gaussian classifier on selected features.
-Why Fisher Score?
-Fisher Score evaluates feature separability between two classes (right hand vs feet). It ranks features based on their contribution to classification​.
-Accuracy overall on all the evaluation data: 79%
+## 1. Online_Dataset
 
-B) SVM Classifier with Fisher Score
-Feature Extraction: Apply CSP to extract log-variance features.
-Feature Selection: Rank CSP features by Fisher Score; select top ones.
-Classification: SVM Model
-Workflow:
-Compute Fisher Score for each CSP feature,
-Select top features with highest discriminability,
-Train SVM classifier on selected features.
-Accuracy overall on all the evaluation data: 85%
+This folder includes all the scripts for training and testing classifiers on the public BNCI-Horizon 2020 motor imagery dataset.
 
-3. Performance Metrics
-   
-Classification Accuracy
+### Dataset
+- **Source**: [BNCI Horizon 2020](https://bnci-horizon-2020.eu/database/data-sets)
+- **Tasks**: Cue-based motor imagery of right hand vs. feet
+- **Sampling Rate**: 512 Hz
+- **Channels**: 15 (motor cortex – Graz-BCI montage)
+- **Trials**: 20 per run, across 8 runs (5 for training, 3 for evaluation)
 
-A)Accuracy overall on all the evaluation data: 79%
+### Preprocessing
+- Bandpass filter (4–56 Hz)
+- Log-band power extraction for mu (8–12 Hz) and beta (14–30 Hz) bands
+- Feature smoothing with moving average
 
-B)Accuracy overall on all the evaluation data: 85%
+### Feature Extraction
+- Power Spectral Density (PSD)
+- Common Spatial Patterns (CSP)
+- Event-Related Desynchronization (ERD) and Synchronization (ERS)
 
-4. Exponential Accumulation Framework for Decision Making
-To enhance the robustness and reliability of EEG-based motor imagery classification, we implement an Exponential Accumulation Framework for decision-making. This framework helps to smooth fluctuations in classification outputs, preventing erratic false positives and ensuring stable decision boundaries.
+### Feature Selection
+- Fisher Score to rank features by discriminability between MI tasks
 
-Key Concept: Smoothing Classification Probabilities
+### Classifiers
+- **Gaussian Classifier**: Trained on CSP features selected via Fisher Score; achieves ~79% accuracy
+- **SVM**: Achieves higher accuracy (~85%) when paired with Fisher-ranked CSP features
 
-Instead of making decisions based on single-instance classifications, which can be noisy, we apply an exponential moving average to accumulate evidence over time. Given a probability output 
-p
-t
-p 
-t
-​	
-  at time 
-t
-t, the accumulated decision probability
-P
-t
-P 
-t
-​	
-  is computed as:
-	
-Pt =αP 
-t−1
-​	
- +(1−α)p 
-t
-​	
- 
-where:
+### Real_Data
+This folder implements the full closed-loop BCI pipeline for real-time MI classification and control of a game-driven robotic exoskeleton for stroke rehabilitation.
 
-P 
-t
-​	
-  is the accumulated probability at time 
-t,
-p 
-t
-​	
-  is the classifier’s probability output at time 
-t,
-α is the smoothing factor.
-P 
-0
-​	
-  is initialized to zero or a neutral state.
-Decision Thresholding
+Objectives:
 
-A command is triggered when 
-P 
-t
-​	
-  exceeds a predefined threshold 
-T
-d
-​	
-Decision=arg 
-i
-max
-​	
- (P 
-t,i
-​	
- )ifmax(P 
-t
-​	
- )>T 
-d
-​	
- 
-where:
+Real-time motor imagery classification from OpenBCI cap data
+Trigger robotic movement (elbow flexion) via classified intent
+Provide engaging visual feedback via a Unity-based game
+MI Tasks:
 
+Right arm vs. right hand imagery (custom recorded dataset)
 
-i represents each possible class (e.g., right hand vs feet imagery),
-T 
-d
-​	
-  is an adaptive threshold tuned to minimize false positives.
-This approach significantly improves BCI performance, especially in asynchronous (self-paced) BCIs, where decisions need to be stable rather than reacting to every small change in the EEG signal.
+Two game modes:
+Mode 1: Full exoskeleton actuation upon MI detection
+Mode 2: Patient-initiated movement + MI-triggered assistance
+Communication handled via UDP sockets
+### Game:
 
-In the Trainings folder there's everything to process and train a classifier on data recorded via 16 channel EEG cap, the MI tasks performed were Right Arm vs Right Hand.
+Developed in Unity
+Simulates picking flowers with elbow flexion
+Adjustable difficulty: range of motion, sequence length
+Tracks progress via .csv logs (reaction times, voluntary movement)
+Data Logging:
 
-To run the MATLAB scripts:
+Session ID, reaction time, autonomous movement (degrees), timestamps
+Integration:
 
-Install MATLAB (recommended: 2020b or newer).
-Clone this repository:
-git clone https://github.com/243135-tech/BCI_development.git
-Add the necessary toolboxes:
+UDP-based command architecture between:
+MATLAB BCI backend
+Raspberry Pi-controlled exoskeleton
+Unity game engine
+### Requirements
+
+MATLAB (R2020b or newer recommended)
 Signal Processing Toolbox
 Statistics and Machine Learning Toolbox
-Results & Insights
+Unity (for the game interface)
+Python (on Raspberry Pi for exoskeleton control)
+OpenBCI GUI and EEG headset
+### Setup Instructions
 
-Gaussian Classifier with Fisher Score provides robust feature selection, ensuring high separability between MI classes.
-Random Forest with CSP outperforms linear classifiers due to better feature utilization​.
-Combining Fisher Score and CSP improves classification accuracy and ensures better generalization.
-Future Work
+Clone the Repository
+git clone https://github.com/243135-tech/BCI_development.git
+Run Classifier on Online Dataset
+cd Online_Dataset
+run('Data_analysis.m')
+Run Real-Time BCI Pipeline
+Start OpenBCI GUI and begin EEG stream
+Launch Unity game
+Run classification script in MATLAB
+UDP triggers will control both the LEGO arm and Unity interface
+### Results & Insights
 
-Optimize real-time BCI feedback for practical applications.
-Test on additional EEG datasets to validate generalization.
-References
+Fisher Score provided effective feature ranking
+CSP + Random Forest outperformed linear models in several configurations
+Game-based feedback improved participant engagement
+Exponential accumulation improved classification robustness in real-time settings
+### References
 
-BNCI Horizon 2020 Database: https://bnci-horizon-2020.eu/database/data-sets
-Motor Imagery BCI - Random Forest vs. Linear Models​
-Locally Generated CSP Features for Classification​
-EEG Data Analysis & Preprocessing Script​
+BNCI Horizon 2020 Dataset: https://bnci-horizon-2020.eu/database/data-sets
+"Random Forests vs. Regularized LDA – Non-linear Beats Linear"
+"BCI Classification using Locally Generated CSP Features"
+"BCI-Based Robotic System for Upper Limb Rehabilitation After Stroke"
+"Transferring BCIs Beyond the Laboratory"
 License
 
 This project is licensed under the MIT License.
+
