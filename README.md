@@ -29,15 +29,14 @@ This folder includes all the scripts for training and testing classifiers on the
 - Power Spectral Density (PSD)
 - Common Spatial Patterns (CSP)
 - Event-Related Desynchronization (ERD) and Synchronization (ERS)
-
-### Feature Selection
+Feature Selection:
 - Fisher Score to rank features by discriminability between MI tasks
 
 ### Classifiers
 - **Gaussian Classifier**: Trained on CSP features selected via Fisher Score; achieves ~79% accuracy
 - **SVM**: Achieves higher accuracy (~85%) when paired with Fisher-ranked CSP features
 
-### Real_Data
+## 2.Real_Data
 This folder implements the full closed-loop BCI pipeline for real-time MI classification and control of a game-driven robotic exoskeleton for stroke rehabilitation.
 
 Objectives:
