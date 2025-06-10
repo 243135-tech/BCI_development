@@ -266,6 +266,15 @@ fprintf('SVM (linear):    %.2f%%\n', acc_svm);
 fprintf('LDA:             %.2f%%\n', acc_lda);
 fprintf('Random Forest:   %.2f%%\n', acc_rf);
 
+%% === Save Trained Classifier and Feature Info ===
+model_filename = 'trained_svm_model.mat';
+
+% Save the trained model, selected CSP component indices, and mean/std info
+save(model_filename, 'svm_model', 'selected_idx', 'nonzero_var_idx');
+
+fprintf('Saved trained model and selected features to %s\n', model_filename);
+
+
 % % === PREPARE TEST DATA ===
 % CSP_FeatureMatrix = cell2mat(all_csp_features);
 % CSP_Labels = cell2mat(all_csp_labels);
@@ -344,4 +353,6 @@ ylabel('Channel');
 yticks(1:n_chan); yticklabels(channel_labels);
 title('Fisher Score Map - Channel × Frequency');
 axis xy;
+
+
 
