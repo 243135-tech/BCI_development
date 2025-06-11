@@ -48,25 +48,16 @@ MI Tasks:
 
 Right arm vs. right hand imagery (custom recorded dataset)
 
-Two game modes:
-Mode 1: Full exoskeleton actuation upon MI detection
-Mode 2: Patient-initiated movement + MI-triggered assistance
-Communication handled via UDP sockets
-### Game:
+### Game Overview
+The Unity game simulates a flower-picking task using elbow flexion, triggered by motor imagery (MI). The current implementation supports only:
 
-Developed in Unity
-Simulates picking flowers with elbow flexion
-Adjustable difficulty: range of motion, sequence length
-Tracks progress via .csv logs (reaction times, voluntary movement)
-Data Logging:
+Grabbing flowers thanks to right hand MI task and lifting them via right arm MI task.
 
-Session ID, reaction time, autonomous movement (degrees), timestamps
-Integration:
-
-UDP-based command architecture between:
-MATLAB BCI backend
-Raspberry Pi-controlled exoskeleton
-Unity game engine
+### How to Run
+Install Unity: Use Unity Hub to install Unity Editor (version 2021.3 LTS or later).
+Open Project: Load the project folder in Unity.
+Run: Open MainScene.unity and press Play in the Editor.
+UDP Communication: The game listens for "grab" and "lift" commands via UDP. Ensure the BCI system sends messages to the IP/port specified in UdpHost.cs.
 ### Requirements
 
 MATLAB (R2020b or newer recommended)
@@ -74,7 +65,7 @@ Signal Processing Toolbox
 Statistics and Machine Learning Toolbox
 Unity (for the game interface)
 Python (on Raspberry Pi for exoskeleton control)
-OpenBCI GUI and EEG headset
+OpenBCI GUI and EEG headset (for new data)
 ### Setup Instructions
 
 Clone the Repository
