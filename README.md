@@ -14,11 +14,11 @@ This repository contains MATLAB code and documentation for the development of a 
 This folder includes all the scripts for training and testing classifiers on the public BNCI-Horizon 2020 motor imagery dataset.
 
 ### Dataset
-- **Source**: [BNCI Horizon 2020](https://bnci-horizon-2020.eu/database/data-sets)
-- **Tasks**: Cue-based motor imagery of right hand vs. feet
-- **Sampling Rate**: 512 Hz
-- **Channels**: 15 (motor cortex – Graz-BCI montage)
-- **Trials**: 20 per run, across 8 runs (5 for training, 3 for evaluation)
+- Source: [BNCI Horizon 2020](https://bnci-horizon-2020.eu/database/data-sets)
+- Tasks: Cue-based motor imagery of right hand vs. feet
+- Sampling Rate: 512 Hz
+- Channels: 15 (motor cortex – Graz-BCI montage)
+- Trials: 20 per run, across 8 runs (5 for training, 3 for evaluation)
 
 ### Preprocessing
 - Bandpass filter (4–56 Hz)
@@ -36,7 +36,7 @@ Feature Selection:
 - **Gaussian Classifier**: Trained on CSP features selected via Fisher Score; achieves ~79% accuracy
 - **SVM**: Achieves higher accuracy (~85%) when paired with Fisher-ranked CSP features
 
-## 2.Real_Data
+## 2. Real_Data
 This folder implements the full closed-loop BCI pipeline for real-time MI classification and control of a game-driven robotic exoskeleton for stroke rehabilitation.
 
 Objectives:
@@ -78,12 +78,7 @@ Start OpenBCI GUI and begin EEG stream
 Launch Unity game
 Run classification script in MATLAB
 UDP triggers will control both the LEGO arm and Unity interface
-### Results & Insights
 
-Fisher Score provided effective feature ranking
-CSP + Random Forest outperformed linear models in several configurations
-Game-based feedback improved participant engagement
-Exponential accumulation improved classification robustness in real-time settings
 ### References
 
 BNCI Horizon 2020 Dataset: https://bnci-horizon-2020.eu/database/data-sets
