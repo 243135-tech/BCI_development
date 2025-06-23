@@ -49,7 +49,7 @@ MI Tasks:
 Right arm vs. right hand imagery (custom recorded dataset)
 
 ### Game Overview
-![Screenshot](./Game_interface)
+![Screenshot](./Game_interface.png)
 The Unity game simulates a flower-picking task using elbow flexion, triggered by motor imagery (MI). The current implementation supports only:
 
 Grabbing flowers thanks to right hand MI task and lifting them via right arm MI task.
