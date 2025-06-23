@@ -36,7 +36,7 @@ Feature Selection:
 - **Gaussian Classifier**: Trained on CSP features selected via Fisher Score; achieves ~79% accuracy
 - **SVM**: Achieves higher accuracy (~85%) when paired with Fisher-ranked CSP features
 
-## 2. Real_Data
+## 2. Acquired_Data
 This folder implements the full closed-loop BCI pipeline for real-time MI classification and control of a game-driven robotic exoskeleton for stroke rehabilitation.
 
 Objectives:
@@ -49,6 +49,7 @@ MI Tasks:
 Right arm vs. right hand imagery (custom recorded dataset)
 
 ### Game Overview
+![Screenshot](./Game_interface)
 The Unity game simulates a flower-picking task using elbow flexion, triggered by motor imagery (MI). The current implementation supports only:
 
 Grabbing flowers thanks to right hand MI task and lifting them via right arm MI task.
